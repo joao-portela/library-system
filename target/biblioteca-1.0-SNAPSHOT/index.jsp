@@ -24,6 +24,8 @@
                         <!-- Link aponta para o Servlet, não para o JSP direto -->
                         <a href="cadastro-livros.jsp" class="btn btn-primary btn-lg">Gerir Livros</a>
                         <a href="fazer-emprestimo.jsp" class="btn btn-success btn-lg">Realizar Empréstimo</a>
+                        <a href="devolucao-livro.jsp" class="btn btn-warning btn-lg">Devolver Livro</a>
+                        <a href="historico-emprestimos.jsp" class="btn btn-info btn-lg text-white">Histórico Empréstimos</a>
                     </div>
                 </div>
             </div>

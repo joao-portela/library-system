@@ -1,9 +1,12 @@
-com\controller\LivroServlet.class
+com\model\Devolucao.class
 com\model\Emprestimo.class
-com\model\Livro.class
 com\mycompany\biblioteca\resources\JakartaEE10Resource.class
-com\dao\EmprestimoDAO.class
-com\mycompany\biblioteca\JakartaRestConfiguration.class
 com\model\Usuario.class
+com\controller\LivroServlet.class
+com\model\Livro.class
+com\dao\EmprestimoDAO.class
+com\dao\DevolucaoDAO.class
+com\mycompany\biblioteca\JakartaRestConfiguration.class
 com\dao\LivroDAO.class
+com\controller\DevolucaoServlet.class
 com\utils\ConnectionFactory.class

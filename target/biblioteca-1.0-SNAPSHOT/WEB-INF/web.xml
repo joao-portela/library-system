@@ -8,6 +8,14 @@
         <servlet-name>LivroServlet</servlet-name>
         <url-pattern>/LivroServlet</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>DevolucaoServlet</servlet-name>
+        <servlet-class>com.controller.DevolucaoServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>DevolucaoServlet</servlet-name>
+        <url-pattern>/devolucao</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30
