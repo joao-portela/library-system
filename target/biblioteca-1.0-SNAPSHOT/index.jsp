@@ -5,13 +5,28 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Sistema Biblioteca</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     </head>
-    <body>
-        <h1>Hello World!</h1>
+    <body class="bg-light">
+        <div class="container mt-5 text-center">
+            <div class="card shadow">
+                <div class="card-body">
+                    <h1 class="card-title mb-4">Bem-vindo à Biblioteca</h1>
+                    <p class="lead">Selecione uma opção abaixo:</p>
+                    
+                    <div class="d-grid gap-2 col-6 mx-auto">
+                        <!-- Link aponta para o Servlet, não para o JSP direto -->
+                        <a href="cadastro-livros.jsp" class="btn btn-primary btn-lg">Gerir Livros</a>
+                        <a href="fazer-emprestimo.jsp" class="btn btn-success btn-lg">Realizar Empréstimo</a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </body>
 </html>

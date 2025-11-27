@@ -1,2 +1,9 @@
+com\controller\LivroServlet.class
+com\model\Emprestimo.class
+com\model\Livro.class
 com\mycompany\biblioteca\resources\JakartaEE10Resource.class
+com\dao\EmprestimoDAO.class
 com\mycompany\biblioteca\JakartaRestConfiguration.class
+com\model\Usuario.class
+com\dao\LivroDAO.class
+com\utils\ConnectionFactory.class
