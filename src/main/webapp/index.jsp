@@ -26,6 +26,7 @@
                         <a href="<%= request.getContextPath() %>/livros" class="btn btn-primary btn-lg">Gerir Livros</a>
                         <a href="<%= request.getContextPath() %>/emprestimos" class="btn btn-success btn-lg">Gerenciar Empréstimos</a>
                         <a href="<%= request.getContextPath() %>/penalidades" class="btn btn-danger btn-lg">Gerenciar Penalidades</a>
+                        <a href="<%= request.getContextPath() %>/relatorios" class="btn btn-warning btn-lg">Relatórios Administrativos</a>
                     </div>
                 </div>
             </div>
