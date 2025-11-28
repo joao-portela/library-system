@@ -45,7 +45,11 @@ public class DevolucaoDAO {
                 try (PreparedStatement ps = conn.prepareStatement(insertSql, Statement.RETURN_GENERATED_KEYS)) {
                     ps.setLong(1, devolucao.getIdEmprestimo() != null ? devolucao.getIdEmprestimo() : 0L);
                     ps.setString(2, devolucao.getMatriculaUsuario());
-                    ps.setObject(3, devolucao.getDataDevolucao());
+                    if (devolucao.getDataDevolucao() != null) {
+                        ps.setDate(3, java.sql.Date.valueOf(devolucao.getDataDevolucao()));
+                    } else {
+                        ps.setNull(3, java.sql.Types.DATE);
+                    }
                     ps.setInt(4, devolucao.getDiasAtraso());
                     ps.setDouble(5, devolucao.getValorMulta());
                     ps.setBoolean(6, devolucao.isPenalidadeAplicada());
@@ -59,7 +63,11 @@ public class DevolucaoDAO {
 
                 if (devolucao.getIdEmprestimo() != null && devolucao.getIdEmprestimo() > 0) {
                     try (PreparedStatement ps2 = conn.prepareStatement(updateEmprestimoSql)) {
-                        ps2.setObject(1, devolucao.getDataDevolucao());
+                        if (devolucao.getDataDevolucao() != null) {
+                            ps2.setDate(1, java.sql.Date.valueOf(devolucao.getDataDevolucao()));
+                        } else {
+                            ps2.setNull(1, java.sql.Types.DATE);
+                        }
                         ps2.setLong(2, devolucao.getIdEmprestimo());
                         ps2.executeUpdate();
                     }

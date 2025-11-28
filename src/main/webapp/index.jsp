@@ -25,7 +25,6 @@
                         <!-- Aponta para os servlets para que os atributos sejam preparados antes do JSP -->
                         <a href="<%= request.getContextPath() %>/livros" class="btn btn-primary btn-lg">Gerir Livros</a>
                         <a href="<%= request.getContextPath() %>/emprestimos" class="btn btn-success btn-lg">Realizar Empréstimo</a>
-                        <a href="<%= request.getContextPath() %>/devolucao" class="btn btn-warning btn-lg">Devolver Livro</a>
                         <a href="<%= request.getContextPath() %>/historico-emprestimos.jsp" class="btn btn-info btn-lg text-white">Histórico Empréstimos</a>
                         <a href="<%= request.getContextPath() %>/penalidades" class="btn btn-danger btn-lg">Gerenciar Penalidades</a>
                     </div>
