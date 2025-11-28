@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.utils;
 
 import java.sql.Connection;
@@ -43,7 +39,6 @@ public class InicializadorBD implements ServletContextListener {
                 LOGGER.info("Usuário ADMIN inserido.");
             }
 
-            // Garantir colunas de bloqueio em USUARIOS (compatibilidade com versões antigas)
             if (tabelaExiste(conn, "USUARIOS")) {
                 if (!colunaExiste(conn, "USUARIOS", "BLOQUEADO")) {
                     try {
