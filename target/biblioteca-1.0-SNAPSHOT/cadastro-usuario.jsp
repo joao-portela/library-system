@@ -22,12 +22,12 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" rel="stylesheet">
     </head>
-    <body>
-        <nav class="navbar navbar-dark bg-dark mb-4">
+    <body style="background-color: #f0f4f8;">
+        <nav class="navbar mb-4" style="background-color: #1e3a5f;">
             <div class="container d-flex">
-                <a class="navbar-brand" href="index.jsp">Sistema Biblioteca</a>
+                <a class="navbar-brand" href="index.jsp" style="color: white;">Sistema Biblioteca</a>
                 <div class="ms-auto">
-                    <a href="index.jsp" class="btn btn-outline-light btn-sm" aria-label="Voltar para a página inicial">
+                    <a href="index.jsp" class="btn btn-sm" style="border: 1px solid white; color: white;" aria-label="Voltar para a página inicial">
                         <i class="bi bi-house"></i>
                         <span class="ms-1">Início</span>
                     </a>
@@ -39,8 +39,8 @@
             <div class="row">
                 <!-- Formulário de Cadastro -->
                 <div class="col-md-4">
-                    <div class="card">
-                        <div class="card-header bg-success text-white">Novo Usuário</div>
+                    <div class="card" style="border: none; border-top: 3px solid #2c5282;">
+                        <div class="card-header text-white" style="background-color: #2c5282;">Novo Usuário</div>
                         <div class="card-body">
                             <form action="usuarios" method="POST" accept-charset="UTF-8">
                                 <div class="mb-3">
@@ -59,7 +59,7 @@
                                     <label>CPF</label>
                                     <input type="text" name="cpf" class="form-control" required>
                                 </div>
-                                <button type="submit" class="btn btn-success w-100">Cadastrar Usuário</button>
+                                <button type="submit" class="btn w-100" style="background-color: #2c5282; color: white;">Cadastrar Usuário</button>
                             </form>
                         </div>
                     </div>
@@ -67,9 +67,9 @@
 
                 <!-- Tabela de Listagem -->
                 <div class="col-md-8">
-                    <h3>Usuários Cadastrados</h3>
+                    <h3 style="color: #1e3a5f;">Usuários Cadastrados</h3>
                     <table class="table table-striped table-hover">
-                        <thead class="table-dark">
+                        <thead style="background-color: #1e3a5f; color: white;">
                             <tr>
                                 <th>ID</th>
                                 <th>Nome</th>

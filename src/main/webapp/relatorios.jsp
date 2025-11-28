@@ -10,41 +10,49 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <style>
-        /* Estilo propositalmente simples / amador */
-        body { background: #ffffff; color: #000; font-family: Arial, sans-serif; }
+        /* Estilo universitário moderno - Azul/Branco */
+        body { background: #f0f4f8; color: #1e3a5f; font-family: Arial, sans-serif; }
         .container { max-width: 1000px; margin: 20px auto; }
-        h1, h2 { font-weight: normal; color: #111; margin: 0 0 10px 0; }
-        /* Cards sem decoração nem sombra */
-        .card { border: 1px solid #bbb; border-radius: 0; background: #fff; box-shadow: none !important; }
+        h1, h2 { font-weight: normal; color: #1e3a5f; margin: 0 0 10px 0; }
+        /* Cards com estilo universitário */
+        .card { border: none; border-top: 3px solid #1e3a5f; border-radius: 0; background: #fff; box-shadow: 0 2px 4px rgba(0,0,0,0.1) !important; }
         .card-body { padding: 12px; }
-        /* Cabeçalhos de seção discretos */
-        .section-title { font-size: 1.1rem; margin-bottom: 8px; border-bottom: 1px solid #ddd; padding-bottom: 6px; }
-        /* Estatísticas simples */
+        /* Cabeçalhos de seção */
+        .section-title { font-size: 1.1rem; margin-bottom: 8px; border-bottom: 1px solid #3182ce; padding-bottom: 6px; color: #1e3a5f; }
+        /* Estatísticas */
         .stat-card .card-body { text-align: center; }
-        .stat-card i { display: block; margin-bottom: 6px; color: #222; }
-        /* Tabelas sem listras nem hover chamativo */
+        .stat-card i { display: block; margin-bottom: 6px; color: #1e3a5f; }
+        /* Tabelas */
         table { width: 100%; border-collapse: collapse; margin-top: 10px; }
         th, td { border: 1px solid #ddd; padding: 6px 8px; text-align: left; }
-        thead th { background: #f0f0f0; color: #000; font-weight: normal; }
-        tr:nth-child(even) { background: #fff; }
-        /* Badges discretas */
-        .badge { background: #e0e0e0 !important; color: #000 !important; border-radius: 3px; padding: 3px 6px; font-size: 0.9em; }
-        /* Botões simples, sem ícones vistosos */
-        .btn { background: #e6e6e6; color: #000; border: 1px solid #cfcfcf; padding: 6px 10px; text-decoration: none; display: inline-block; }
-        .btn:hover { background: #dfdfdf; }
+        thead th { background: #1e3a5f; color: white; font-weight: normal; }
+        tr:nth-child(even) { background: #f0f4f8; }
+        /* Badges */
+        .badge { background: #2c5282 !important; color: white !important; border-radius: 3px; padding: 3px 6px; font-size: 0.9em; }
+        /* Botões */
+        .btn { background: #1e3a5f; color: white; border: none; padding: 6px 10px; text-decoration: none; display: inline-block; }
+        .btn:hover { background: #2c5282; color: white; }
+        .btn-secondary { background: #2c5282; }
+        .btn-primary { background: #1e3a5f; }
+        .btn-outline-primary { background: white; color: #1e3a5f; border: 1px solid #1e3a5f; }
+        .btn-outline-primary:hover { background: #1e3a5f; color: white; }
+        .btn-outline-success { background: white; color: #2c5282; border: 1px solid #2c5282; }
+        .btn-outline-success:hover { background: #2c5282; color: white; }
+        .btn-outline-danger { background: white; color: #c53030; border: 1px solid #c53030; }
+        .btn-outline-danger:hover { background: #c53030; color: white; }
         .d-flex { display: flex; }
         .gap-2 > * { margin-right: 8px; }
         .mb-4 { margin-bottom: 16px; }
         .mt-4 { margin-top: 16px; }
-        .text-muted { color: #555; }
+        .text-muted { color: #2c5282; }
     </style>
 </head>
-<body class="bg-light">
+<body style="background-color: #f0f4f8;">
     <div class="container mt-4">
         <!-- Cabeçalho -->
         <div class="d-flex justify-content-between align-items-center mb-4">
-            <h1><i class="bi bi-graph-up"></i> Relatórios Administrativos</h1>
-            <a href="<%= request.getContextPath() %>/" class="btn btn-secondary">
+            <h1 style="color: #1e3a5f;"><i class="bi bi-graph-up"></i> Relatórios Administrativos</h1>
+            <a href="<%= request.getContextPath() %>/" class="btn" style="background-color: #2c5282; color: white;">
                 <i class="bi bi-house"></i> Voltar ao Menu
             </a>
         </div>
@@ -55,7 +63,7 @@
                 <div class="col-md-3">
                     <div class="card stat-card text-center shadow-sm">
                         <div class="card-body">
-                            <i class="bi bi-book text-primary" style="font-size: 2rem;"></i>
+                            <i class="bi bi-book" style="font-size: 2rem; color: #1e3a5f;"></i>
                             <h3 class="mt-2">${totalLivros}</h3>
                             <p class="text-muted mb-0">Total de Livros</p>
                         </div>
@@ -64,7 +72,7 @@
                 <div class="col-md-3">
                     <div class="card stat-card text-center shadow-sm">
                         <div class="card-body">
-                            <i class="bi bi-people text-success" style="font-size: 2rem;"></i>
+                            <i class="bi bi-people" style="font-size: 2rem; color: #2c5282;"></i>
                             <h3 class="mt-2">${totalUsuarios}</h3>
                             <p class="text-muted mb-0">Total de Usuários</p>
                         </div>
@@ -73,7 +81,7 @@
                 <div class="col-md-3">
                     <div class="card stat-card text-center shadow-sm">
                         <div class="card-body">
-                            <i class="bi bi-clock-history text-info" style="font-size: 2rem;"></i>
+                            <i class="bi bi-clock-history" style="font-size: 2rem; color: #3182ce;"></i>
                             <h3 class="mt-2">${totalEmprestimosAtivos}</h3>
                             <p class="text-muted mb-0">Empréstimos Ativos</p>
                         </div>
@@ -82,7 +90,7 @@
                 <div class="col-md-3">
                     <div class="card stat-card text-center shadow-sm">
                         <div class="card-body">
-                            <i class="bi bi-exclamation-triangle text-danger" style="font-size: 2rem;"></i>
+                            <i class="bi bi-exclamation-triangle" style="font-size: 2rem; color: #c53030;"></i>
                             <h3 class="mt-2">${totalEmprestimosAtrasados}</h3>
                             <p class="text-muted mb-0">Empréstimos Atrasados</p>
                         </div>
@@ -97,11 +105,11 @@
                 <div class="card shadow">
                     <div class="card-body">
                         <h2 class="section-title">
-                            <i class="bi bi-book-fill text-primary"></i> Livros Mais Emprestados
+                            <i class="bi bi-book-fill" style="color: #1e3a5f;"></i> Livros Mais Emprestados
                         </h2>
                         <div class="table-responsive">
                             <table class="table table-hover table-striped">
-                                <thead class="table-primary">
+                                <thead style="background-color: #1e3a5f; color: white;">
                                     <tr>
                                         <th>#</th>
                                         <th>Título</th>
@@ -141,11 +149,11 @@
                 <div class="card shadow">
                     <div class="card-body">
                         <h2 class="section-title">
-                            <i class="bi bi-person-fill text-success"></i> Usuários com Mais Empréstimos
+                            <i class="bi bi-person-fill" style="color: #2c5282;"></i> Usuários com Mais Empréstimos
                         </h2>
                         <div class="table-responsive">
                             <table class="table table-hover table-striped">
-                                <thead class="table-success">
+                                <thead style="background-color: #2c5282; color: white;">
                                     <tr>
                                         <th>#</th>
                                         <th>Nome</th>
@@ -185,17 +193,17 @@
                 <div class="card shadow">
                     <div class="card-body">
                         <h2 class="section-title">
-                            <i class="bi bi-exclamation-triangle-fill text-danger"></i> Empréstimos em Atraso
+                            <i class="bi bi-exclamation-triangle-fill" style="color: #c53030;"></i> Empréstimos em Atraso
                         </h2>
                         <c:choose>
                             <c:when test="${not empty emprestimosEmAtraso}">
-                                <div class="alert alert-warning">
+                                <div class="alert" style="background-color: #ebf8ff; color: #1e3a5f; border: 1px solid #3182ce;">
                                     <i class="bi bi-exclamation-circle"></i> 
                                     <strong>Atenção!</strong> Existem ${emprestimosEmAtraso.size()} empréstimo(s) em atraso.
                                 </div>
                                 <div class="table-responsive">
                                     <table class="table table-hover table-striped">
-                                        <thead class="table-danger">
+                                        <thead style="background-color: #c53030; color: white;">
                                             <tr>
                                                 <th>ID</th>
                                                 <th>Livro</th>

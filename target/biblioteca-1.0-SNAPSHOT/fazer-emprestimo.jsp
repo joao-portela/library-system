@@ -25,12 +25,12 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" rel="stylesheet">
     </head>
-    <body>
-        <nav class="navbar navbar-dark bg-dark mb-4">
+    <body style="background-color: #f0f4f8;">
+        <nav class="navbar mb-4" style="background-color: #1e3a5f;">
                 <div class="container d-flex">
-                <a class="navbar-brand" href="<%= request.getContextPath() %>/">Sistema Biblioteca</a>
+                <a class="navbar-brand" href="<%= request.getContextPath() %>/" style="color: white;">Sistema Biblioteca</a>
                 <div class="ms-auto">
-                    <a href="<%= request.getContextPath() %>/" class="btn btn-outline-light btn-sm" aria-label="Voltar para a página inicial">
+                    <a href="<%= request.getContextPath() %>/" class="btn btn-sm" style="border: 1px solid white; color: white;" aria-label="Voltar para a página inicial">
                         <i class="bi bi-house"></i>
                         <span class="ms-1">Início</span>
                     </a>
@@ -41,8 +41,8 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-5">
-                    <div class="card">
-                        <div class="card-header bg-success text-white">Registrar Empréstimo</div>
+                    <div class="card" style="border: none; border-top: 3px solid #3182ce;">
+                        <div class="card-header text-white" style="background-color: #3182ce;">Registrar Empréstimo</div>
                         <div class="card-body">
                             <c:if test="${not empty usuarioNaoEncontrado}">
                                 <div class="alert alert-warning">
@@ -76,7 +76,7 @@
                                     </select>
                                 </div>
                                 <div class="d-grid">
-                                    <button type="submit" class="btn btn-success">Registrar Empréstimo</button>
+                                    <button type="submit" class="btn" style="background-color: #3182ce; color: white;">Registrar Empréstimo</button>
                                 </div>
                             </form>
                         </div>
@@ -84,7 +84,7 @@
                 </div>
 
                 <div class="col-md-7">
-                    <h4>Empréstimos Recentes</h4>
+                    <h4 style="color: #1e3a5f;">Empréstimos Recentes</h4>
                     <div class="row row-cols-1 g-3">
                         <c:forEach var="emp" items="${listaEmprestimos}">
                             <div class="col">

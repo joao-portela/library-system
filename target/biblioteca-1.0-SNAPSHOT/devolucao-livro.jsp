@@ -6,13 +6,13 @@
         <title>Devolução de Livros</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     </head>
-    <body class="bg-light">
+    <body style="background-color: #f0f4f8;">
         <div class="container mt-5">
-            <div class="card shadow">
+            <div class="card shadow" style="border: none; border-top: 4px solid #1e3a5f;">
                 <div class="card-body">
                     <div class="d-flex justify-content-between align-items-center mb-3">
-                        <h3 class="card-title">Devolução de Livros</h3>
-                        <a href="<%= request.getContextPath() %>/emprestimos" class="btn btn-secondary">Voltar</a>
+                        <h3 class="card-title" style="color: #1e3a5f;">Devolução de Livros</h3>
+                        <a href="<%= request.getContextPath() %>/emprestimos" class="btn" style="background-color: #2c5282; color: white;">Voltar</a>
                     </div>
                     <div class="mt-4">
                         <% String erro = (String) request.getAttribute("erro"); %>
