@@ -9,6 +9,7 @@ import java.util.List;
 import com.dao.DevolucaoDAO;
 import com.dao.EmprestimoDAO;
 import com.dao.LivroDAO;
+import com.dao.PenalidadeDAO;
 import com.dao.UsuarioDAO;
 import com.model.Emprestimo;
 import com.model.Livro;
@@ -27,6 +28,7 @@ public class EmprestimoServlet extends HttpServlet {
     private UsuarioDAO usuarioDAO = new UsuarioDAO();
     private LivroDAO livroDAO = new LivroDAO();
     private DevolucaoDAO devolucaoDAO = new DevolucaoDAO();
+    private PenalidadeDAO penalidadeDAO = new PenalidadeDAO();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -84,10 +86,23 @@ public class EmprestimoServlet extends HttpServlet {
                 return;
             }
 
+            // Verificar se usuário está bloqueado
             try {
-                boolean possuiPenalidade = devolucaoDAO.usuarioPossuiPenalidade(matricula);
-                if (possuiPenalidade) {
-                    req.setAttribute("erro", "Usuário possui penalidade por atraso excessivo e não pode realizar empréstimos até regularizar.");
+                if (usuarioDAO.isUsuarioBloqueado(usuario.getId())) {
+                    req.setAttribute("erro", "Usuário está bloqueado temporariamente e não pode realizar empréstimos. Entre em contato com a biblioteca.");
+                    doGet(req, resp);
+                    return;
+                }
+            } catch (Exception ex) {
+                req.setAttribute("erro", "Não foi possível verificar o status de bloqueio do usuário: " + ex.getMessage());
+                doGet(req, resp);
+                return;
+            }
+
+            // Verificar se possui bloqueio ativo no sistema de penalidades
+            try {
+                if (penalidadeDAO.usuarioTemBloqueioAtivo(usuario.getId())) {
+                    req.setAttribute("erro", "Usuário possui bloqueio ativo e não pode realizar empréstimos até a regularização.");
                     doGet(req, resp);
                     return;
                 }
@@ -95,6 +110,16 @@ public class EmprestimoServlet extends HttpServlet {
                 req.setAttribute("erro", "Não foi possível verificar penalidades do usuário: " + ex.getMessage());
                 doGet(req, resp);
                 return;
+            }
+
+            // Verificar multas pendentes (opcional - apenas aviso)
+            try {
+                double multasPendentes = penalidadeDAO.calcularTotalMultasPendentes(usuario.getId());
+                if (multasPendentes > 0) {
+                    req.setAttribute("aviso", String.format("Atenção: Usuário possui R$ %.2f em multas pendentes.", multasPendentes));
+                }
+            } catch (Exception ex) {
+                // Continua mesmo com erro ao verificar multas
             }
 
             if (livro.getQuantidadeDisponivel() <= 0) {

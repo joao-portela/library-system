@@ -14,6 +14,8 @@ public class Usuario {
     private String cpf;
     private String matricula;
     private String email;
+    private boolean bloqueado;
+    private java.sql.Date dataBloqueio;
     
     public Usuario() {}
 
@@ -41,4 +43,10 @@ public class Usuario {
     
     public String getMatricula() { return matricula; }
     public void setMatricula(String matricula) { this.matricula = matricula; }
+    
+    public boolean isBloqueado() { return bloqueado; }
+    public void setBloqueado(boolean bloqueado) { this.bloqueado = bloqueado; }
+    
+    public java.sql.Date getDataBloqueio() { return dataBloqueio; }
+    public void setDataBloqueio(java.sql.Date dataBloqueio) { this.dataBloqueio = dataBloqueio; }
 }

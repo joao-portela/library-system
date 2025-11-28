@@ -110,4 +110,79 @@ public class UsuarioDAO {
             stmt.executeUpdate();
         }
     }
+
+    /**
+     * Bloqueia um usuário temporariamente
+     */
+    public void bloquearUsuario(int id, java.sql.Date dataBloqueio) throws SQLException {
+        String sql = "UPDATE usuarios SET bloqueado = TRUE, data_bloqueio = ? WHERE id = ?";
+        
+        try (Connection conn = ConnectionFactory.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            
+            stmt.setDate(1, dataBloqueio);
+            stmt.setInt(2, id);
+            stmt.executeUpdate();
+        }
+    }
+
+    /**
+     * Desbloqueia um usuário
+     */
+    public void desbloquearUsuario(int id) throws SQLException {
+        String sql = "UPDATE usuarios SET bloqueado = FALSE, data_bloqueio = NULL WHERE id = ?";
+        
+        try (Connection conn = ConnectionFactory.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            
+            stmt.setInt(1, id);
+            stmt.executeUpdate();
+        }
+    }
+
+    /**
+     * Verifica se um usuário está bloqueado
+     */
+    public boolean isUsuarioBloqueado(int id) throws SQLException {
+        String sql = "SELECT bloqueado FROM usuarios WHERE id = ?";
+        
+        try (Connection conn = ConnectionFactory.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            
+            stmt.setInt(1, id);
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getBoolean("bloqueado");
+                }
+            }
+        }
+        
+        return false;
+    }
+
+    /**
+     * Lista usuários bloqueados
+     */
+    public List<Usuario> listarBloqueados() throws SQLException {
+        List<Usuario> usuarios = new ArrayList<>();
+        String sql = "SELECT * FROM usuarios WHERE bloqueado = TRUE";
+
+        try (Connection conn = ConnectionFactory.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql);
+             ResultSet rs = stmt.executeQuery()) {
+
+            while (rs.next()) {
+                Usuario u = new Usuario();
+                u.setId(rs.getInt("id"));
+                u.setNome(rs.getString("nome"));
+                u.setEmail(rs.getString("email"));
+                u.setMatricula(rs.getString("matricula"));
+                u.setCPF(rs.getString("cpf"));
+                u.setBloqueado(rs.getBoolean("bloqueado"));
+                u.setDataBloqueio(rs.getDate("data_bloqueio"));
+                usuarios.add(u);
+            }
+        }
+        return usuarios;
+    }
 }

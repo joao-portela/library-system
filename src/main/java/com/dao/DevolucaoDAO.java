@@ -9,6 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.model.Devolucao;
+import com.model.Penalidade;
+import com.model.Penalidade.TipoPenalidade;
+import com.model.Usuario;
 import com.utils.ConnectionFactory;
 
 public class DevolucaoDAO {
@@ -78,6 +81,11 @@ public class DevolucaoDAO {
                     }
                 }
 
+                // Aplicar penalidades por atraso
+                if (devolucao.getDiasAtraso() > 0) {
+                    aplicarPenalidades(conn, devolucao);
+                }
+
                 conn.commit();
                 return devolucao;
             } catch (Exception e) {
@@ -88,6 +96,71 @@ public class DevolucaoDAO {
             }
         } catch (Exception e) {
             throw new RuntimeException(e);
+        }
+    }
+
+    /**
+     * Aplica penalidades automáticas por atraso na devolução
+     * Regras:
+     * - Atraso até 30 dias: Apenas multa (R$ 1,50 por dia)
+     * - Atraso acima de 30 dias: Multa + R$ 50,00 adicional + Bloqueio temporário de 30 dias
+     */
+    private void aplicarPenalidades(Connection conn, Devolucao devolucao) throws Exception {
+        if (devolucao.getIdEmprestimo() == null || devolucao.getIdEmprestimo() == 0) {
+            return;
+        }
+
+        // Buscar usuário do empréstimo
+        String sqlUsuario = "SELECT usuario_id FROM emprestimos WHERE id = ?";
+        int usuarioId = 0;
+        try (PreparedStatement ps = conn.prepareStatement(sqlUsuario)) {
+            ps.setLong(1, devolucao.getIdEmprestimo());
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    usuarioId = rs.getInt("usuario_id");
+                }
+            }
+        }
+
+        if (usuarioId == 0) {
+            return;
+        }
+
+        PenalidadeDAO penalidadeDAO = new PenalidadeDAO();
+        UsuarioDAO usuarioDAO = new UsuarioDAO();
+        LocalDate hoje = LocalDate.now();
+
+        // Registrar multa
+        if (devolucao.getValorMulta() > 0) {
+            Penalidade multa = new Penalidade();
+            multa.setUsuarioId(usuarioId);
+            multa.setTipo(TipoPenalidade.MULTA);
+            multa.setDataInicio(hoje);
+            multa.setDataFim(null);
+            multa.setValor(devolucao.getValorMulta());
+            multa.setMotivoDescricao(String.format("Multa por atraso de %d dias na devolução do livro (Empréstimo #%d)", 
+                                                   devolucao.getDiasAtraso(), devolucao.getIdEmprestimo()));
+            multa.setDiasAtraso(devolucao.getDiasAtraso());
+            penalidadeDAO.registrar(multa);
+        }
+
+        // Aplicar bloqueio temporário se atraso > 30 dias
+        if (devolucao.getDiasAtraso() > 30) {
+            LocalDate dataFimBloqueio = hoje.plusDays(30);
+            
+            Penalidade bloqueio = new Penalidade();
+            bloqueio.setUsuarioId(usuarioId);
+            bloqueio.setTipo(TipoPenalidade.BLOQUEIO_TEMPORARIO);
+            bloqueio.setDataInicio(hoje);
+            bloqueio.setDataFim(dataFimBloqueio);
+            bloqueio.setValor(0.0);
+            bloqueio.setMotivoDescricao(String.format("Bloqueio temporário de 30 dias por atraso superior a 30 dias (%d dias) na devolução (Empréstimo #%d)", 
+                                                      devolucao.getDiasAtraso(), devolucao.getIdEmprestimo()));
+            bloqueio.setDiasAtraso(devolucao.getDiasAtraso());
+            penalidadeDAO.registrar(bloqueio);
+
+            // Bloquear usuário no banco
+            usuarioDAO.bloquearUsuario(usuarioId, java.sql.Date.valueOf(hoje));
         }
     }
 
