@@ -30,10 +30,20 @@ public class PenalidadeDAO {
             
             stmt.setInt(1, penalidade.getUsuarioId());
             stmt.setString(2, penalidade.getTipo().name());
-            stmt.setObject(3, penalidade.getDataInicio());
-            stmt.setObject(4, penalidade.getDataFim());
+            // Derby JDBC driver doesn't support setObject for java.time.LocalDate — use java.sql.Date
+            if (penalidade.getDataInicio() != null) {
+                stmt.setDate(3, java.sql.Date.valueOf(penalidade.getDataInicio()));
+            } else {
+                stmt.setNull(3, java.sql.Types.DATE);
+            }
+            if (penalidade.getDataFim() != null) {
+                stmt.setDate(4, java.sql.Date.valueOf(penalidade.getDataFim()));
+            } else {
+                stmt.setNull(4, java.sql.Types.DATE);
+            }
             stmt.setDouble(5, penalidade.getValor());
-            stmt.setString(6, penalidade.getStatus().name());
+            String status = penalidade.getStatus() != null ? penalidade.getStatus().name() : "ATIVA";
+            stmt.setString(6, status);
             stmt.setString(7, penalidade.getMotivoDescricao());
             stmt.setInt(8, penalidade.getDiasAtraso());
             

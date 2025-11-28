@@ -6,6 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@page import="com.dao.LivroDAO" %>
 <%@page import="java.util.List" %>
 <%
@@ -98,7 +99,7 @@
                                             <div>
                                                 <h5 class="card-title mb-1">${emp.livro.titulo}</h5>
                                                 <p class="mb-1 text-muted small">Autor: ${emp.livro.autor} — Usuário: ${emp.usuario.nome} (${emp.usuario.matricula})</p>
-                                                <p class="mb-0 small">Emprestado: ${emp.dataEmprestimo} — Previsto: ${emp.dataDevolucaoPrevista}</p>
+                                                <p class="mb-0 small">Emprestado: <fmt:formatDate value="${emp.dataEmprestimo}" pattern="dd/MM/yyyy"/> — Previsto: <fmt:formatDate value="${emp.dataDevolucaoPrevista}" pattern="dd/MM/yyyy"/></p>
                                             </div>
                                             <div class="text-end">
                                                 <c:choose>

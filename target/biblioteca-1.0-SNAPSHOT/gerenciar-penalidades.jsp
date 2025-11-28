@@ -221,7 +221,7 @@
                             <td>
                                 <c:choose>
                                     <c:when test="${not empty usuario.dataBloqueio}">
-                                        ${usuario.dataBloqueio}
+                                        <fmt:formatDate value="${usuario.dataBloqueio}" pattern="dd/MM/yyyy" />
                                     </c:when>
                                     <c:otherwise>-</c:otherwise>
                                 </c:choose>
@@ -315,12 +315,14 @@
                                 </c:choose>
                             </td>
                             <td>
-                                ${penalidade.dataInicio}
+                                <% com.model.Penalidade _p = (com.model.Penalidade) pageContext.findAttribute("penalidade"); %>
+                                <%= (_p != null && _p.getDataInicio() != null) ? _p.getDataInicio().format(java.time.format.DateTimeFormatter.ofPattern("dd/MM/yyyy")) : "" %>
                             </td>
                             <td>
                                 <c:choose>
                                     <c:when test="${not empty penalidade.dataFim}">
-                                        ${penalidade.dataFim}
+                                        <% com.model.Penalidade _p2 = (com.model.Penalidade) pageContext.findAttribute("penalidade"); %>
+                                        <%= (_p2 != null && _p2.getDataFim() != null) ? _p2.getDataFim().format(java.time.format.DateTimeFormatter.ofPattern("dd/MM/yyyy")) : "" %>
                                     </c:when>
                                     <c:otherwise>
                                         -

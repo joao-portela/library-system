@@ -29,7 +29,7 @@
                                     <tr><th>ID Devolução</th><td><%= resultado.getId() %></td></tr>
                                     <tr><th>ID Empréstimo</th><td><%= resultado.getIdEmprestimo() %></td></tr>
                                     <tr><th>Matrícula</th><td><%= resultado.getMatriculaUsuario() %></td></tr>
-                                    <tr><th>Data Devolução</th><td><%= resultado.getDataDevolucao() %></td></tr>
+                                    <tr><th>Data Devolução</th><td><%= resultado.getDataDevolucao() != null ? resultado.getDataDevolucao().format(java.time.format.DateTimeFormatter.ofPattern("dd/MM/yyyy")) : "" %></td></tr>
                                     <tr><th>Dias Atraso</th><td><%= resultado.getDiasAtraso() %></td></tr>
                                     <tr><th>Valor Multa</th><td>R$ <%= String.format("%.2f", resultado.getValorMulta()) %></td></tr>
                                     <tr><th>Penalidade</th><td><%= resultado.isPenalidadeAplicada() ? "Sim" : "Não" %></td></tr>

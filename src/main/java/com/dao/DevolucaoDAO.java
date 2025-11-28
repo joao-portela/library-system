@@ -106,12 +106,6 @@ public class DevolucaoDAO {
         }
     }
 
-    /**
-     * Aplica penalidades automáticas por atraso na devolução
-     * Regras:
-     * - Atraso até 30 dias: Apenas multa (R$ 1,50 por dia)
-     * - Atraso acima de 30 dias: Multa + R$ 50,00 adicional + Bloqueio temporário de 30 dias
-     */
     private void aplicarPenalidades(Connection conn, Devolucao devolucao) throws Exception {
         if (devolucao.getIdEmprestimo() == null || devolucao.getIdEmprestimo() == 0) {
             return;
