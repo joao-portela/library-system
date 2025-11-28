@@ -16,6 +16,14 @@
         <servlet-name>DevolucaoServlet</servlet-name>
         <url-pattern>/devolucao</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>UsuarioServlet</servlet-name>
+        <servlet-class>com.controller.UsuarioServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>UsuarioServlet</servlet-name>
+        <url-pattern>/usuarios</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30

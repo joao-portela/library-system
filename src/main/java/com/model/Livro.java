@@ -9,7 +9,7 @@ package com.model;
  * @author joaop
  */
 public class Livro {
-   private int id;
+    private int id;
     private String titulo;
     private String autor;
     private String editora;

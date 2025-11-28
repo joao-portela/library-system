@@ -14,6 +14,7 @@ import java.sql.SQLException;
  */
 public class ConnectionFactory {
     // Configuração para Java DB (Apache Derby) - Padrão do NetBeans/GlassFish
+    // Derby usa UTF-8 por padrão, não precisa especificar encoding na URL
     private static final String URL = "jdbc:derby://localhost:1527/biblioteca;create=true";
     private static final String USER = "bibliotecario";
     private static final String PASS = "1234";
