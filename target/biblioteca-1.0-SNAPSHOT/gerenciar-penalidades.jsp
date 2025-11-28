@@ -11,7 +11,7 @@
         body {
             font-family: Arial, sans-serif;
             margin: 20px;
-            background-color: #f4f4f4;
+            background-color: #f0f4f8;
         }
         .container {
             max-width: 1200px;
@@ -22,12 +22,12 @@
             box-shadow: 0 0 10px rgba(0,0,0,0.1);
         }
         h1, h2 {
-            color: #333;
+            color: #1e3a5f;
         }
         .menu {
             margin-bottom: 20px;
             padding: 10px;
-            background: #007bff;
+            background: #1e3a5f;
             border-radius: 5px;
         }
         .menu a {
@@ -36,11 +36,11 @@
             padding: 10px 15px;
             margin-right: 10px;
             display: inline-block;
-            background: #0056b3;
+            background: #2c5282;
             border-radius: 3px;
         }
         .menu a:hover {
-            background: #004494;
+            background: #3182ce;
         }
         table {
             width: 100%;
@@ -51,7 +51,7 @@
             border: 1px solid #ddd;
         }
         th {
-            background-color: #007bff;
+            background-color: #1e3a5f;
             color: white;
             padding: 10px;
             text-align: left;
@@ -60,7 +60,7 @@
             padding: 8px;
         }
         tr:nth-child(even) {
-            background-color: #f2f2f2;
+            background-color: #f0f4f8;
         }
         .btn {
             padding: 8px 12px;
@@ -74,29 +74,29 @@
             font-size: 14px;
         }
         .btn-success {
-            background-color: #28a745;
+            background-color: #2c5282;
         }
         .btn-success:hover {
-            background-color: #218838;
+            background-color: #1e3a5f;
         }
         .btn-danger {
-            background-color: #dc3545;
+            background-color: #c53030;
         }
         .btn-danger:hover {
-            background-color: #c82333;
+            background-color: #9b2c2c;
         }
         .btn-warning {
-            background-color: #ffc107;
-            color: #333;
+            background-color: #3182ce;
+            color: white;
         }
         .btn-warning:hover {
-            background-color: #e0a800;
+            background-color: #2c5282;
         }
         .btn-info {
-            background-color: #17a2b8;
+            background-color: #3182ce;
         }
         .btn-info:hover {
-            background-color: #138496;
+            background-color: #2c5282;
         }
         .alert {
             padding: 15px;
@@ -104,19 +104,19 @@
             border-radius: 5px;
         }
         .alert-success {
-            background-color: #d4edda;
-            color: #155724;
-            border: 1px solid #c3e6cb;
+            background-color: #e6f2ff;
+            color: #1e3a5f;
+            border: 1px solid #3182ce;
         }
         .alert-danger {
-            background-color: #f8d7da;
-            color: #721c24;
-            border: 1px solid #f5c6cb;
+            background-color: #fed7d7;
+            color: #c53030;
+            border: 1px solid #fc8181;
         }
         .alert-warning {
-            background-color: #fff3cd;
-            color: #856404;
-            border: 1px solid #ffeaa7;
+            background-color: #ebf8ff;
+            color: #2c5282;
+            border: 1px solid #90cdf4;
         }
         .status-badge {
             padding: 4px 8px;
@@ -125,27 +125,27 @@
             font-weight: bold;
         }
         .status-ativa {
-            background-color: #dc3545;
+            background-color: #c53030;
             color: white;
         }
         .status-paga {
-            background-color: #28a745;
+            background-color: #2c5282;
             color: white;
         }
         .status-cancelada {
-            background-color: #6c757d;
+            background-color: #718096;
             color: white;
         }
         .status-expirada {
-            background-color: #ffc107;
-            color: #333;
+            background-color: #3182ce;
+            color: white;
         }
         .tipo-multa {
-            color: #dc3545;
+            color: #c53030;
             font-weight: bold;
         }
         .tipo-bloqueio {
-            color: #fd7e14;
+            color: #2c5282;
             font-weight: bold;
         }
         .stats {
@@ -156,19 +156,19 @@
         .stat-card {
             flex: 1;
             padding: 15px;
-            background: #f8f9fa;
+            background: #f0f4f8;
             border-radius: 5px;
-            border-left: 4px solid #007bff;
+            border-left: 4px solid #1e3a5f;
         }
         .stat-card h3 {
             margin: 0 0 10px 0;
-            color: #666;
+            color: #2c5282;
             font-size: 14px;
         }
         .stat-card .value {
             font-size: 24px;
             font-weight: bold;
-            color: #333;
+            color: #1e3a5f;
         }
     </style>
 </head>
