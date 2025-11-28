@@ -11,6 +11,5 @@ com\dao\DevolucaoDAO.class
 com\dao\UsuarioDAO.class
 com\mycompany\biblioteca\JakartaRestConfiguration.class
 com\dao\LivroDAO.class
-com\db\DbInspect.class
 com\controller\DevolucaoServlet.class
 com\utils\ConnectionFactory.class
