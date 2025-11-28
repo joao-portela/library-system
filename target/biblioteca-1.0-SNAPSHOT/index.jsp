@@ -27,6 +27,7 @@
                         <a href="<%= request.getContextPath() %>/emprestimos" class="btn btn-success btn-lg">Realizar Empréstimo</a>
                         <a href="<%= request.getContextPath() %>/historico-emprestimos.jsp" class="btn btn-info btn-lg text-white">Histórico Empréstimos</a>
                         <a href="<%= request.getContextPath() %>/penalidades" class="btn btn-danger btn-lg">Gerenciar Penalidades</a>
+                        <a href="<%= request.getContextPath() %>/relatorios" class="btn btn-warning btn-lg">Relatórios Administrativos</a>
                     </div>
                 </div>
             </div>
