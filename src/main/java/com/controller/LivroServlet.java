@@ -28,24 +28,62 @@ public class LivroServlet extends HttpServlet {
     // O método doGet é chamado quando acessamos a URL /livros pelo navegador
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        try {
             // 1. Chama o DAO para buscar todos os livros do banco
-            List<Livro> lista = livroDAO.listarTodos();
-            
-            // 2. Coloca a lista dentro da requisição para o JSP poder ler
-            req.setAttribute("listaLivros", lista);
-            
-            // 3. Encaminha para a página JSP que vai desenhar a tabela
-            req.getRequestDispatcher("/livros.jsp").forward(req, resp);
-            
-        } catch (SQLException e) {
-            throw new ServletException("Erro ao buscar livros", e);
-        }
+                String acao = req.getParameter("acao");
+
+                // Confirmação de deleção
+                if ("confirmarDeletar".equals(acao)) {
+                    String idStr = req.getParameter("id");
+                    if (idStr != null && !idStr.isEmpty()) {
+                        try {
+                            int id = Integer.parseInt(idStr);
+                            Livro livro = livroDAO.buscarPorId(id);
+                            if (livro != null) {
+                                req.setAttribute("livro", livro);
+                                req.getRequestDispatcher("/confirmar-deletar-livro.jsp").forward(req, resp);
+                                return;
+                            }
+                        } catch (NumberFormatException | SQLException e) {
+                            throw new ServletException("Erro ao buscar livro", e);
+                        }
+                    }
+                }
+
+                // Deleção confirmada
+                if ("deletar".equals(acao)) {
+                    String idStr = req.getParameter("id");
+                    if (idStr != null && !idStr.isEmpty()) {
+                        try {
+                            int id = Integer.parseInt(idStr);
+                            livroDAO.deletar(id);
+                            resp.sendRedirect("livros");
+                            return;
+                        } catch (NumberFormatException | SQLException e) {
+                            throw new ServletException("Erro ao deletar livro", e);
+                        }
+                    }
+                }
+
+                try {
+                    // 1. Chama o DAO para buscar todos os livros do banco
+                    List<Livro> lista = livroDAO.listarTodos();
+
+                    // 2. Coloca a lista dentro da requisição para o JSP poder ler
+                    req.setAttribute("listaLivros", lista);
+
+                    // 3. Encaminha para a página JSP que vai desenhar a tabela
+                    req.getRequestDispatcher("/cadastro-livro.jsp").forward(req, resp);
+
+                } catch (SQLException e) {
+                    throw new ServletException("Erro ao buscar livros", e);
+                }
     }
 
     // O método doPost é chamado quando o formulário de cadastro é enviado
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.setCharacterEncoding("UTF-8");
+
         // 1. Pega os dados que vieram dos campos do formulário HTML
         String titulo = req.getParameter("titulo");
         String autor = req.getParameter("autor");

@@ -80,6 +80,26 @@ public class UsuarioDAO {
         return null;
     }
 
+    public Usuario buscarPorMatricula(String matricula) throws SQLException {
+        String sql = "SELECT * FROM usuarios WHERE matricula = ?";
+        try (Connection conn = ConnectionFactory.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, matricula);
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    Usuario u = new Usuario();
+                    u.setId(rs.getInt("id"));
+                    u.setNome(rs.getString("nome"));
+                    u.setEmail(rs.getString("email"));
+                    u.setMatricula(rs.getString("matricula"));
+                    u.setCPF(rs.getString("cpf"));
+                    return u;
+                }
+            }
+        }
+        return null;
+    }
+
     public void deletar(int id) throws SQLException {
         String sql = "DELETE FROM usuarios WHERE id = ?";
         

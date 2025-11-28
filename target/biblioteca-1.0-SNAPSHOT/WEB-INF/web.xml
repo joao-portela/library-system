@@ -6,7 +6,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>LivroServlet</servlet-name>
-        <url-pattern>/LivroServlet</url-pattern>
+        <url-pattern>/livros</url-pattern>
     </servlet-mapping>
     <servlet>
         <servlet-name>DevolucaoServlet</servlet-name>
@@ -15,6 +15,14 @@
     <servlet-mapping>
         <servlet-name>DevolucaoServlet</servlet-name>
         <url-pattern>/devolucao</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>EmprestimoServlet</servlet-name>
+        <servlet-class>com.controller.EmprestimoServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>EmprestimoServlet</servlet-name>
+        <url-pattern>/emprestimos</url-pattern>
     </servlet-mapping>
     <servlet>
         <servlet-name>UsuarioServlet</servlet-name>

@@ -1,5 +1,6 @@
 C:\Users\joaop\OneDrive\Documentos\NetBeansProjects\biblioteca\src\main\java\com\dao\UsuarioDAO.java
 C:\Users\joaop\OneDrive\Documentos\NetBeansProjects\biblioteca\src\main\java\com\mycompany\biblioteca\resources\JakartaEE10Resource.java
+C:\Users\joaop\OneDrive\Documentos\NetBeansProjects\biblioteca\src\main\java\com\db\DbInspect.java
 C:\Users\joaop\OneDrive\Documentos\NetBeansProjects\biblioteca\src\main\java\com\utils\ConnectionFactory.java
 C:\Users\joaop\OneDrive\Documentos\NetBeansProjects\biblioteca\src\main\java\com\dao\EmprestimoDAO.java
 C:\Users\joaop\OneDrive\Documentos\NetBeansProjects\biblioteca\src\main\java\com\model\Livro.java
@@ -9,6 +10,7 @@ C:\Users\joaop\OneDrive\Documentos\NetBeansProjects\biblioteca\src\main\java\com
 C:\Users\joaop\OneDrive\Documentos\NetBeansProjects\biblioteca\src\main\java\com\dao\DevolucaoDAO.java
 C:\Users\joaop\OneDrive\Documentos\NetBeansProjects\biblioteca\src\main\java\com\dao\LivroDAO.java
 C:\Users\joaop\OneDrive\Documentos\NetBeansProjects\biblioteca\src\main\java\com\model\Devolucao.java
+C:\Users\joaop\OneDrive\Documentos\NetBeansProjects\biblioteca\src\main\java\com\controller\EmprestimoServlet.java
 C:\Users\joaop\OneDrive\Documentos\NetBeansProjects\biblioteca\src\main\java\com\mycompany\biblioteca\JakartaRestConfiguration.java
 C:\Users\joaop\OneDrive\Documentos\NetBeansProjects\biblioteca\src\main\java\com\controller\DevolucaoServlet.java
 C:\Users\joaop\OneDrive\Documentos\NetBeansProjects\biblioteca\src\main\java\com\controller\LivroServlet.java

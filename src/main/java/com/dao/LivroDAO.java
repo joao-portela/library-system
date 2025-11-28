@@ -67,12 +67,33 @@ public class LivroDAO {
                     Livro l = new Livro();
                     l.setId(rs.getInt("id"));
                     l.setTitulo(rs.getString("titulo"));
+                    l.setAutor(rs.getString("autor"));
+                    l.setEditora(rs.getString("editora"));
+                    l.setIsbn(rs.getString("isbn"));
                     l.setQuantidadeDisponivel(rs.getInt("quantidade_disponivel"));
-                    // setar outros campos...
                     return l;
                 }
             }
         }
         return null;
+    }
+
+    public void atualizarQuantidadeDisponivel(int id, int novaQuantidade) throws SQLException {
+        String sql = "UPDATE livros SET quantidade_disponivel = ? WHERE id = ?";
+        try (Connection conn = ConnectionFactory.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, novaQuantidade);
+            stmt.setInt(2, id);
+            stmt.executeUpdate();
+        }
+    }
+
+    public void deletar(int id) throws SQLException {
+        String sql = "DELETE FROM livros WHERE id = ?";
+        try (Connection conn = ConnectionFactory.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, id);
+            stmt.executeUpdate();
+        }
     }
 }
