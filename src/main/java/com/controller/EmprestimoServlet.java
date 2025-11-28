@@ -1,16 +1,19 @@
 package com.controller;
 
+import java.io.IOException;
+import java.sql.Date;
+import java.sql.SQLException;
+import java.time.LocalDate;
+import java.util.List;
+
+import com.dao.DevolucaoDAO;
 import com.dao.EmprestimoDAO;
 import com.dao.LivroDAO;
 import com.dao.UsuarioDAO;
 import com.model.Emprestimo;
 import com.model.Livro;
 import com.model.Usuario;
-import java.io.IOException;
-import java.sql.Date;
-import java.sql.SQLException;
-import java.time.LocalDate;
-import java.util.List;
+
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -23,6 +26,7 @@ public class EmprestimoServlet extends HttpServlet {
     private EmprestimoDAO emprestimoDAO = new EmprestimoDAO();
     private UsuarioDAO usuarioDAO = new UsuarioDAO();
     private LivroDAO livroDAO = new LivroDAO();
+    private DevolucaoDAO devolucaoDAO = new DevolucaoDAO();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -76,6 +80,19 @@ public class EmprestimoServlet extends HttpServlet {
             Livro livro = livroDAO.buscarPorId(livroId);
             if (livro == null) {
                 req.setAttribute("erro", "Livro não encontrado.");
+                doGet(req, resp);
+                return;
+            }
+
+            try {
+                boolean possuiPenalidade = devolucaoDAO.usuarioPossuiPenalidade(matricula);
+                if (possuiPenalidade) {
+                    req.setAttribute("erro", "Usuário possui penalidade por atraso excessivo e não pode realizar empréstimos até regularizar.");
+                    doGet(req, resp);
+                    return;
+                }
+            } catch (Exception ex) {
+                req.setAttribute("erro", "Não foi possível verificar penalidades do usuário: " + ex.getMessage());
                 doGet(req, resp);
                 return;
             }

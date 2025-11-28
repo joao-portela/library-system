@@ -1,4 +1,4 @@
-<%@page contentType="text/html" pageEncoding="UTF-8" import="com.dao.DevolucaoDAO,com.model.Devolucao,java.util.List"%>
+<%@page contentType="text/html" pageEncoding="UTF-8" import="com.dao.DevolucaoDAO,com.dao.EmprestimoDAO,com.model.Devolucao,com.model.Emprestimo,com.model.Livro,java.util.List,java.sql.SQLException"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -18,6 +18,7 @@
                         String papel = (String) session.getAttribute("papel");
                         String matricula = (String) session.getAttribute("matricula");
                         DevolucaoDAO dao = new DevolucaoDAO();
+                        EmprestimoDAO emprestimoDAO = new EmprestimoDAO();
                         List<Devolucao> lista = null;
                         if ("admin".equals(papel)) {
                             lista = dao.buscarTodos();
@@ -47,10 +48,27 @@
                                     <td><%= d.getId() %></td>
                                     <td><%= d.getIdEmprestimo() %></td>
                                     <td><%= d.getMatriculaUsuario() %></td>
-                                    <td><%= d.getDataDevolucao() %></td>
+                                    <td>
+                                        <%
+                                            Emprestimo emp = null;
+                                            Livro livro = null;
+                                            try {
+                                                if (d.getIdEmprestimo() != null) {
+                                                    emp = emprestimoDAO.buscarPorId(d.getIdEmprestimo().intValue());
+                                                    if (emp != null) livro = emp.getLivro();
+                                                }
+                                            } catch (SQLException ex) {
+                                            }
+                                        %>
+                                        <%= d.getDataDevolucao() %>
+                                        <% if (emp != null) { %>
+                                            <br/><small class="text-muted">Empr: <%= emp.getDataEmprestimo() %> - Prev: <%= emp.getDataDevolucaoPrevista() %></small>
+                                        <% } %>
+                                    </td>
                                     <td><%= d.getDiasAtraso() %></td>
                                     <td>R$ <%= String.format("%.2f", d.getValorMulta()) %></td>
                                     <td><%= d.isPenalidadeAplicada() ? "Sim" : "Não" %></td>
+                                    <td><% if (livro != null) { %> <%= livro.getTitulo() %> <% } %></td>
                                 </tr>
                                 <% } %>
                             </tbody>
