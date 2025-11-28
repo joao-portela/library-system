@@ -16,9 +16,9 @@ import jakarta.servlet.ServletContextListener;
 import jakarta.servlet.annotation.WebListener;
 
 @WebListener
-public class DatabaseInitializer implements ServletContextListener {
+public class InicializadorBD implements ServletContextListener {
 
-    private static final Logger LOGGER = Logger.getLogger(DatabaseInitializer.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(InicializadorBD.class.getName());
 
     @Override
     public void contextInitialized(ServletContextEvent sce) {

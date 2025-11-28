@@ -10,26 +10,33 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <style>
-        .stat-card {
-            transition: transform 0.2s;
-        }
-        .stat-card:hover {
-            transform: translateY(-5px);
-        }
-        .table-responsive {
-            margin-top: 20px;
-        }
-        .badge-atraso {
-            font-size: 0.9em;
-        }
-        .report-section {
-            margin-bottom: 40px;
-        }
-        .section-title {
-            border-bottom: 3px solid #0d6efd;
-            padding-bottom: 10px;
-            margin-bottom: 20px;
-        }
+        /* Estilo propositalmente simples / amador */
+        body { background: #ffffff; color: #000; font-family: Arial, sans-serif; }
+        .container { max-width: 1000px; margin: 20px auto; }
+        h1, h2 { font-weight: normal; color: #111; margin: 0 0 10px 0; }
+        /* Cards sem decoração nem sombra */
+        .card { border: 1px solid #bbb; border-radius: 0; background: #fff; box-shadow: none !important; }
+        .card-body { padding: 12px; }
+        /* Cabeçalhos de seção discretos */
+        .section-title { font-size: 1.1rem; margin-bottom: 8px; border-bottom: 1px solid #ddd; padding-bottom: 6px; }
+        /* Estatísticas simples */
+        .stat-card .card-body { text-align: center; }
+        .stat-card i { display: block; margin-bottom: 6px; color: #222; }
+        /* Tabelas sem listras nem hover chamativo */
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+        th, td { border: 1px solid #ddd; padding: 6px 8px; text-align: left; }
+        thead th { background: #f0f0f0; color: #000; font-weight: normal; }
+        tr:nth-child(even) { background: #fff; }
+        /* Badges discretas */
+        .badge { background: #e0e0e0 !important; color: #000 !important; border-radius: 3px; padding: 3px 6px; font-size: 0.9em; }
+        /* Botões simples, sem ícones vistosos */
+        .btn { background: #e6e6e6; color: #000; border: 1px solid #cfcfcf; padding: 6px 10px; text-decoration: none; display: inline-block; }
+        .btn:hover { background: #dfdfdf; }
+        .d-flex { display: flex; }
+        .gap-2 > * { margin-right: 8px; }
+        .mb-4 { margin-bottom: 16px; }
+        .mt-4 { margin-top: 16px; }
+        .text-muted { color: #555; }
     </style>
 </head>
 <body class="bg-light">
