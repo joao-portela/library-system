@@ -43,6 +43,26 @@ public class DatabaseInitializer implements ServletContextListener {
                 LOGGER.info("Usuário ADMIN inserido.");
             }
 
+            // Garantir colunas de bloqueio em USUARIOS (compatibilidade com versões antigas)
+            if (tabelaExiste(conn, "USUARIOS")) {
+                if (!colunaExiste(conn, "USUARIOS", "BLOQUEADO")) {
+                    try {
+                        executarSql(conn, "ALTER TABLE usuarios ADD bloqueado BOOLEAN DEFAULT FALSE");
+                        LOGGER.info("Coluna BLOQUEADO adicionada à tabela USUARIOS.");
+                    } catch (SQLException ex) {
+                        LOGGER.warning("Não foi possível adicionar coluna BLOQUEADO: " + ex.getMessage());
+                    }
+                }
+                if (!colunaExiste(conn, "USUARIOS", "DATA_BLOQUEIO")) {
+                    try {
+                        executarSql(conn, "ALTER TABLE usuarios ADD data_bloqueio DATE");
+                        LOGGER.info("Coluna DATA_BLOQUEIO adicionada à tabela USUARIOS.");
+                    } catch (SQLException ex) {
+                        LOGGER.warning("Não foi possível adicionar coluna DATA_BLOQUEIO: " + ex.getMessage());
+                    }
+                }
+            }
+
             // 2. Criar Tabela Livros se não existir
             if (!tabelaExiste(conn, "LIVROS")) {
                 String sql = "CREATE TABLE livros ("
@@ -92,6 +112,28 @@ public class DatabaseInitializer implements ServletContextListener {
                 executarSql(conn, sqlDev);
                 LOGGER.info("Tabela DEVOLUCOES criada com sucesso.");
             }
+
+            // 5. Criar tabela Penalidades se não existir
+            if (!tabelaExiste(conn, "PENALIDADES")) {
+                String sqlPen = "CREATE TABLE penalidades ("
+                        + "id BIGINT PRIMARY KEY GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1), "
+                        + "usuario_id INT NOT NULL, "
+                        + "tipo VARCHAR(30) NOT NULL, "
+                        + "data_inicio DATE NOT NULL, "
+                        + "data_fim DATE, "
+                        + "valor DECIMAL(10,2) DEFAULT 0.0, "
+                        + "status VARCHAR(20) DEFAULT 'ATIVA', "
+                        + "motivo_descricao VARCHAR(500), "
+                        + "dias_atraso INT DEFAULT 0, "
+                        + "FOREIGN KEY (usuario_id) REFERENCES usuarios(id)"
+                        + ")";
+                try {
+                    executarSql(conn, sqlPen);
+                    LOGGER.info("Tabela PENALIDADES criada com sucesso.");
+                } catch (SQLException ex) {
+                    LOGGER.warning("Não foi possível criar tabela PENALIDADES: " + ex.getMessage());
+                }
+            }
             
         } catch (Exception e) {
             LOGGER.severe("Erro ao inicializar banco de dados: " + e.getMessage());
@@ -108,6 +150,14 @@ public class DatabaseInitializer implements ServletContextListener {
     private boolean tabelaExiste(Connection conn, String nomeTabela) throws SQLException {
         DatabaseMetaData meta = conn.getMetaData();
         try (ResultSet rs = meta.getTables(null, null, nomeTabela.toUpperCase(), null)) {
+            return rs.next();
+        }
+    }
+
+    // Método auxiliar para verificar se uma coluna existe em uma tabela (case-insensitive)
+    private boolean colunaExiste(Connection conn, String nomeTabela, String nomeColuna) throws SQLException {
+        DatabaseMetaData meta = conn.getMetaData();
+        try (ResultSet rs = meta.getColumns(null, null, nomeTabela.toUpperCase(), nomeColuna.toUpperCase())) {
             return rs.next();
         }
     }
