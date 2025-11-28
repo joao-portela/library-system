@@ -112,6 +112,16 @@
                                                                  System.currentTimeMillis() num scriptlet aqui.
                                                             -->
                                                             <span class="badge bg-warning text-dark">Em aberto</span>
+                                                            <!-- Botão para iniciar devolução: preenche id do empréstimo e matrícula -->
+                                                            <c:if test="${empty emp.dataDevolucaoReal}">
+                                                                <form method="post" action="devolucao" class="mt-2" onsubmit="return confirm('Confirma devolução deste empréstimo?');">
+                                                                    <input type="hidden" name="idEmprestimo" value="${emp.id}" />
+                                                                    <input type="hidden" name="matricula" value="${emp.usuario.matricula}" />
+                                                                    <input type="hidden" name="dataPrevista" value="${emp.dataDevolucaoPrevista}" />
+                                                                    <input type="hidden" name="dataDevolucao" value="<%= java.time.LocalDate.now() %>" />
+                                                                    <button type="submit" class="btn btn-sm btn-primary">Devolver</button>
+                                                                </form>
+                                                            </c:if>
                                                         </c:otherwise>
                                                 </c:choose>
                                             </div>

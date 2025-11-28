@@ -10,30 +10,6 @@
         <div class="container mt-5">
             <div class="card shadow">
                 <div class="card-body">
-                    <h3 class="card-title">Devolução de Livros</h3>
-                    <form method="post" action="devolucao" class="row g-3">
-                        <div class="col-md-4">
-                            <label class="form-label">ID Empréstimo</label>
-                            <input type="text" name="idEmprestimo" class="form-control">
-                        </div>
-                        <div class="col-md-4">
-                            <label class="form-label">Matrícula do Usuário</label>
-                            <input type="text" name="matricula" class="form-control">
-                        </div>
-                        <div class="col-md-4">
-                            <label class="form-label">Data Prevista (yyyy-MM-dd)</label>
-                            <input type="date" name="dataPrevista" class="form-control">
-                        </div>
-                        <div class="col-md-4">
-                            <label class="form-label">Data Devolução</label>
-                            <input type="date" name="dataDevolucao" class="form-control">
-                        </div>
-                        <div class="col-12">
-                            <button class="btn btn-primary">Registrar Devolução</button>
-                            <a href="index.jsp" class="btn btn-secondary">Voltar</a>
-                        </div>
-                    </form>
-
                     <div class="mt-4">
                         <% String erro = (String) request.getAttribute("erro"); %>
                         <% if (erro != null) { %>

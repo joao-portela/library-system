@@ -50,3 +50,17 @@ ALTER TABLE EMPRESTIMOS ADD CONSTRAINT FK_EMPRESTIMOS_USUARIO FOREIGN KEY (USUAR
 -- - Rode este script com o utilitário `ij` do Apache Derby ou via sua ferramenta de administração.
 -- - Se for rodar em um ambiente com tabelas já existentes, remova-as antes ou use uma estratégia de migração.
 -- ==========================
+
+-- ==========================
+-- Tabela: DEVOLUCOES
+-- ==========================
+CREATE TABLE DEVOLUCOES (
+    ID INT GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1) PRIMARY KEY,
+    ID_EMPRESTIMO INT,
+    MATRICULA_USUARIO VARCHAR(50),
+    DATA_DEVOLUCAO DATE,
+    DIAS_ATRASO INT,
+    VALOR_MULTA DOUBLE,
+    PENALIDADE_APLICADA BOOLEAN DEFAULT FALSE,
+    CONSTRAINT FK_DEVOLUCOES_EMPRESTIMO FOREIGN KEY (ID_EMPRESTIMO) REFERENCES EMPRESTIMOS(ID)
+);

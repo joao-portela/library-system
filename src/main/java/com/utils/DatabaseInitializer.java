@@ -10,6 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Logger;
+
 import jakarta.servlet.ServletContextEvent;
 import jakarta.servlet.ServletContextListener;
 import jakarta.servlet.annotation.WebListener;
@@ -74,6 +75,22 @@ public class DatabaseInitializer implements ServletContextListener {
                         + ")";
                 executarSql(conn, sql);
                 LOGGER.info("Tabela EMPRESTIMOS criada com sucesso.");
+            }
+            
+            // 4. Criar Tabela Devolucoes se não existir
+            if (!tabelaExiste(conn, "DEVOLUCOES")) {
+                String sqlDev = "CREATE TABLE devolucoes ("
+                        + "id INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1), "
+                        + "id_emprestimo INT, "
+                        + "matricula_usuario VARCHAR(50), "
+                        + "data_devolucao DATE, "
+                        + "dias_atraso INT, "
+                        + "valor_multa DOUBLE, "
+                        + "penalidade_aplicada BOOLEAN DEFAULT FALSE, "
+                        + "FOREIGN KEY (id_emprestimo) REFERENCES emprestimos(id)"
+                        + ")";
+                executarSql(conn, sqlDev);
+                LOGGER.info("Tabela DEVOLUCOES criada com sucesso.");
             }
             
         } catch (Exception e) {
