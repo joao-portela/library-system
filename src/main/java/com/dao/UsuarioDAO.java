@@ -60,6 +60,21 @@ public class UsuarioDAO {
         }
     }
 
+    // Verifica se a tabela 'usuarios' possui a coluna indicada (case-insensitive)
+    private boolean hasColumn(Connection conn, String columnName) {
+        try (PreparedStatement ps = conn.prepareStatement("SELECT * FROM usuarios WHERE 1=0");
+             ResultSet rs = ps.executeQuery()) {
+            ResultSetMetaData md = rs.getMetaData();
+            for (int i = 1; i <= md.getColumnCount(); i++) {
+                String label = md.getColumnLabel(i);
+                if (label != null && label.equalsIgnoreCase(columnName)) return true;
+            }
+        } catch (SQLException e) {
+            // se falhar ao inspecionar, assume que a coluna não existe
+        }
+        return false;
+    }
+
     public List<Usuario> listarTodos() throws SQLException {
         List<Usuario> usuarios = new ArrayList<>();
         String sql = "SELECT * FROM usuarios";
@@ -169,14 +184,16 @@ public class UsuarioDAO {
      * Bloqueia um usuário temporariamente
      */
     public void bloquearUsuario(int id, java.sql.Date dataBloqueio) throws SQLException {
-        String sql = "UPDATE usuarios SET bloqueado = TRUE, data_bloqueio = ? WHERE id = ?";
-        
-        try (Connection conn = ConnectionFactory.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
-            
-            stmt.setDate(1, dataBloqueio);
-            stmt.setInt(2, id);
-            stmt.executeUpdate();
+        try (Connection conn = ConnectionFactory.getConnection()) {
+            if (!hasColumn(conn, "bloqueado")) {
+                throw new SQLException("Coluna 'bloqueado' ausente na tabela 'usuarios'. Execute o script de criação/migração para adicioná-la.");
+            }
+            String sql = "UPDATE usuarios SET bloqueado = TRUE, data_bloqueio = ? WHERE id = ?";
+            try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+                stmt.setDate(1, dataBloqueio);
+                stmt.setInt(2, id);
+                stmt.executeUpdate();
+            }
         }
     }
 
@@ -184,13 +201,15 @@ public class UsuarioDAO {
      * Desbloqueia um usuário
      */
     public void desbloquearUsuario(int id) throws SQLException {
-        String sql = "UPDATE usuarios SET bloqueado = FALSE, data_bloqueio = NULL WHERE id = ?";
-        
-        try (Connection conn = ConnectionFactory.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
-            
-            stmt.setInt(1, id);
-            stmt.executeUpdate();
+        try (Connection conn = ConnectionFactory.getConnection()) {
+            if (!hasColumn(conn, "bloqueado")) {
+                throw new SQLException("Coluna 'bloqueado' ausente na tabela 'usuarios'. Execute o script de criação/migração para adicioná-la.");
+            }
+            String sql = "UPDATE usuarios SET bloqueado = FALSE, data_bloqueio = NULL WHERE id = ?";
+            try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+                stmt.setInt(1, id);
+                stmt.executeUpdate();
+            }
         }
     }
 
@@ -198,19 +217,21 @@ public class UsuarioDAO {
      * Verifica se um usuário está bloqueado
      */
     public boolean isUsuarioBloqueado(int id) throws SQLException {
-        String sql = "SELECT bloqueado FROM usuarios WHERE id = ?";
-        
-        try (Connection conn = ConnectionFactory.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
-            
-            stmt.setInt(1, id);
-            try (ResultSet rs = stmt.executeQuery()) {
-                if (rs.next()) {
-                    return rs.getBoolean("bloqueado");
+        try (Connection conn = ConnectionFactory.getConnection()) {
+            if (!hasColumn(conn, "bloqueado")) {
+                // coluna ausente: considera usuário não bloqueado por compatibilidade
+                return false;
+            }
+            String sql = "SELECT bloqueado FROM usuarios WHERE id = ?";
+            try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+                stmt.setInt(1, id);
+                try (ResultSet rs = stmt.executeQuery()) {
+                    if (rs.next()) {
+                        return rs.getBoolean("bloqueado");
+                    }
                 }
             }
         }
-        
         return false;
     }
 
@@ -219,22 +240,25 @@ public class UsuarioDAO {
      */
     public List<Usuario> listarBloqueados() throws SQLException {
         List<Usuario> usuarios = new ArrayList<>();
-        String sql = "SELECT * FROM usuarios WHERE bloqueado = TRUE";
-
-        try (Connection conn = ConnectionFactory.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql);
-             ResultSet rs = stmt.executeQuery()) {
-
-            while (rs.next()) {
-                Usuario u = new Usuario();
-                u.setId(rs.getInt("id"));
-                u.setNome(rs.getString("nome"));
-                u.setEmail(rs.getString("email"));
-                u.setMatricula(rs.getString("matricula"));
-                u.setCPF(rs.getString("cpf"));
-                u.setBloqueado(rs.getBoolean("bloqueado"));
-                u.setDataBloqueio(rs.getDate("data_bloqueio"));
-                usuarios.add(u);
+        try (Connection conn = ConnectionFactory.getConnection()) {
+            if (!hasColumn(conn, "bloqueado")) {
+                // Se a coluna não existe, retorna lista vazia para evitar erro SQL
+                return usuarios;
+            }
+            String sql = "SELECT * FROM usuarios WHERE bloqueado = TRUE";
+            try (PreparedStatement stmt = conn.prepareStatement(sql);
+                 ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    Usuario u = new Usuario();
+                    u.setId(rs.getInt("id"));
+                    u.setNome(rs.getString("nome"));
+                    u.setEmail(rs.getString("email"));
+                    u.setMatricula(rs.getString("matricula"));
+                    u.setCPF(rs.getString("cpf"));
+                    u.setBloqueado(rs.getBoolean("bloqueado"));
+                    u.setDataBloqueio(rs.getDate("data_bloqueio"));
+                    usuarios.add(u);
+                }
             }
         }
         return usuarios;

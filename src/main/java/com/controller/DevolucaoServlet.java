@@ -1,10 +1,12 @@
 package com.controller;
 
-import com.dao.DevolucaoDAO;
-import com.model.Devolucao;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+
+import com.dao.DevolucaoDAO;
+import com.model.Devolucao;
+
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -18,6 +20,21 @@ public class DevolucaoServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String idEmpStr = req.getParameter("idEmprestimo");
+        if (idEmpStr != null && !idEmpStr.isEmpty()) {
+            try {
+                Long idEmp = Long.parseLong(idEmpStr);
+                com.model.Devolucao d = dao.buscarPorEmprestimo(idEmp);
+                if (d != null) {
+                    req.setAttribute("resultado", d);
+                }
+            } catch (NumberFormatException ex) {
+                // ignorar formato inválido e apenas mostrar a página
+            } catch (Exception ex) {
+                // se DAO lançar, ignore aqui e deixe a página tratar erro
+                req.setAttribute("erro", "Erro ao carregar devolução: " + ex.getMessage());
+            }
+        }
         req.getRequestDispatcher("/devolucao-livro.jsp").forward(req, resp);
     }
 

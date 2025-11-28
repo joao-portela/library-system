@@ -11,7 +11,6 @@ import java.util.List;
 import com.model.Devolucao;
 import com.model.Penalidade;
 import com.model.Penalidade.TipoPenalidade;
-import com.model.Usuario;
 import com.utils.ConnectionFactory;
 
 public class DevolucaoDAO {
@@ -218,6 +217,32 @@ public class DevolucaoDAO {
                 resultado.add(d);
             }
             return resultado;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public Devolucao buscarPorEmprestimo(Long idEmprestimo) {
+        String sql = "SELECT id, id_emprestimo, matricula_usuario, data_devolucao, dias_atraso, valor_multa, penalidade_aplicada FROM devolucoes WHERE id_emprestimo = ? ORDER BY data_devolucao DESC";
+        try (Connection conn = ConnectionFactory.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setLong(1, idEmprestimo);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    Devolucao d = new Devolucao();
+                    d.setId(rs.getLong("id"));
+                    d.setIdEmprestimo(rs.getLong("id_emprestimo"));
+                    d.setMatriculaUsuario(rs.getString("matricula_usuario"));
+                    Object obj = rs.getObject("data_devolucao");
+                    if (obj instanceof java.sql.Date) {
+                        d.setDataDevolucao(((java.sql.Date) obj).toLocalDate());
+                    }
+                    d.setDiasAtraso(rs.getInt("dias_atraso"));
+                    d.setValorMulta(rs.getDouble("valor_multa"));
+                    d.setPenalidadeAplicada(rs.getBoolean("penalidade_aplicada"));
+                    return d;
+                }
+                return null;
+            }
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

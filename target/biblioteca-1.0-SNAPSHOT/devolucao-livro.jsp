@@ -10,6 +10,10 @@
         <div class="container mt-5">
             <div class="card shadow">
                 <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h3 class="card-title">Devolução de Livros</h3>
+                        <a href="<%= request.getContextPath() %>/emprestimos" class="btn btn-secondary">Voltar</a>
+                    </div>
                     <div class="mt-4">
                         <% String erro = (String) request.getAttribute("erro"); %>
                         <% if (erro != null) { %>

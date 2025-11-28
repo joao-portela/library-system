@@ -104,6 +104,11 @@
                                                 <c:choose>
                                                     <c:when test="${not empty emp.dataDevolucaoReal}">
                                                         <span class="badge bg-success">Devolvido</span>
+                                                        <!-- Botão para visualizar a devolução correspondente (abre devolucao-livro.jsp via servlet) -->
+                                                        <form method="get" action="devolucao" class="mt-2">
+                                                            <input type="hidden" name="idEmprestimo" value="${emp.id}" />
+                                                            <button type="submit" class="btn btn-sm btn-outline-primary">Visualizar Devolução</button>
+                                                        </form>
                                                     </c:when>
                                                         <c:otherwise>
                                                             <!-- Não tente acessar pageContext.request.time (não existe).
