@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.dao;
 
 import com.model.Livro;
@@ -12,11 +8,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
-/**
- *
- * @author joaop
- */
 public class LivroDAO {
      public void salvar(Livro livro) throws SQLException {
         String sql = "INSERT INTO livros (titulo, autor, editora, isbn, quantidade_disponivel) VALUES (?, ?, ?, ?, ?)";

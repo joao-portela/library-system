@@ -1,9 +1,4 @@
-<%-- 
-    Document   : fazer-emprestimo
-    Created on : Nov 26, 2025, 10:44:23 PM
-    Author     : joaop
---%>
-
+ 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -105,20 +100,15 @@
                                                 <c:choose>
                                                     <c:when test="${not empty emp.dataDevolucaoReal}">
                                                         <span class="badge bg-success">Devolvido</span>
-                                                        <!-- Botão para visualizar a devolução correspondente (abre devolucao-livro.jsp via servlet) -->
                                                         <form method="get" action="devolucao" class="mt-2">
                                                             <input type="hidden" name="idEmprestimo" value="${emp.id}" />
                                                             <button type="submit" class="btn btn-sm btn-outline-primary">Visualizar Devolução</button>
                                                         </form>
                                                     </c:when>
                                                         <c:otherwise>
-                                                            <!-- Não tente acessar pageContext.request.time (não existe).
-                                                                 Se precisar checar vencimento/atraso, calcule no servlet e
-                                                                 forneça um atributo (por exemplo: hojeMillis) ou use
-                                                                 System.currentTimeMillis() num scriptlet aqui.
-                                                            -->
+                                    
                                                             <span class="badge bg-warning text-dark">Em aberto</span>
-                                                            <!-- Botão para iniciar devolução: preenche id do empréstimo e matrícula -->
+                                                    
                                                             <c:if test="${empty emp.dataDevolucaoReal}">
                                                                 <form method="post" action="devolucao" class="mt-2" onsubmit="return confirm('Confirma devolução deste empréstimo?');">
                                                                     <input type="hidden" name="idEmprestimo" value="${emp.id}" />

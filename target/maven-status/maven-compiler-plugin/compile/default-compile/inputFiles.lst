@@ -12,6 +12,7 @@ C:\Users\joaop\OneDrive\Documentos\NetBeansProjects\biblioteca\src\main\java\com
 C:\Users\joaop\OneDrive\Documentos\NetBeansProjects\biblioteca\src\main\java\com\controller\UsuarioServlet.java
 C:\Users\joaop\OneDrive\Documentos\NetBeansProjects\biblioteca\src\main\java\com\model\LivroRelatorioDTO.java
 C:\Users\joaop\OneDrive\Documentos\NetBeansProjects\biblioteca\src\main\java\com\model\Usuario.java
+C:\Users\joaop\OneDrive\Documentos\NetBeansProjects\biblioteca\src\main\java\com\utils\InicializadorBD.java
 C:\Users\joaop\OneDrive\Documentos\NetBeansProjects\biblioteca\src\main\java\com\dao\DevolucaoDAO.java
 C:\Users\joaop\OneDrive\Documentos\NetBeansProjects\biblioteca\src\main\java\com\controller\RelatorioServlet.java
 C:\Users\joaop\OneDrive\Documentos\NetBeansProjects\biblioteca\src\main\java\com\dao\RelatorioDAO.java
@@ -20,5 +21,4 @@ C:\Users\joaop\OneDrive\Documentos\NetBeansProjects\biblioteca\src\main\java\com
 C:\Users\joaop\OneDrive\Documentos\NetBeansProjects\biblioteca\src\main\java\com\controller\EmprestimoServlet.java
 C:\Users\joaop\OneDrive\Documentos\NetBeansProjects\biblioteca\src\main\java\com\mycompany\biblioteca\JakartaRestConfiguration.java
 C:\Users\joaop\OneDrive\Documentos\NetBeansProjects\biblioteca\src\main\java\com\controller\DevolucaoServlet.java
-C:\Users\joaop\OneDrive\Documentos\NetBeansProjects\biblioteca\src\main\java\com\utils\DatabaseInitializer.java
 C:\Users\joaop\OneDrive\Documentos\NetBeansProjects\biblioteca\src\main\java\com\controller\LivroServlet.java

@@ -3,11 +3,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package com.model;
-
-/**
- *
- * @author joaop
- */
 public class Usuario {
     private int id;
     private String nome;

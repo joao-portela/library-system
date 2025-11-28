@@ -1,9 +1,4 @@
-<%-- 
-    Document   : index
-    Created on : Nov 26, 2025, 10:25:45 PM
-    Author     : joaop
---%>
-
+ 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>

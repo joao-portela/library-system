@@ -1,15 +1,9 @@
-<%-- 
-    Document   : cadastro-livro
-    Created on : Nov 26, 2025, 10:43:53 PM
-    Author     : joaop
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@page import="com.dao.LivroDAO" %>
 <%@page import="java.util.List" %>
 <%
-    // Se a lista não foi carregada pelo servlet, carrega aqui
+    // carraga lista de livros
     if (request.getAttribute("listaLivros") == null) {
         try {
             LivroDAO livroDAO = new LivroDAO();

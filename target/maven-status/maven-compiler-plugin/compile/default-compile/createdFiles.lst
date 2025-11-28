@@ -2,7 +2,6 @@ com\model\Devolucao.class
 com\model\Emprestimo.class
 com\mycompany\biblioteca\resources\JakartaEE10Resource.class
 com\model\EmprestimoAtrasadoDTO.class
-com\utils\DatabaseInitializer.class
 com\controller\UsuarioServlet.class
 com\model\Penalidade$StatusPenalidade.class
 com\controller\LivroServlet.class
@@ -14,6 +13,7 @@ com\dao\UsuarioDAO.class
 com\dao\LivroDAO.class
 com\model\LivroRelatorioDTO.class
 com\model\UsuarioRelatorioDTO.class
+com\utils\InicializadorBD.class
 com\controller\RelatorioServlet.class
 com\dao\PenalidadeDAO.class
 com\model\Usuario.class
