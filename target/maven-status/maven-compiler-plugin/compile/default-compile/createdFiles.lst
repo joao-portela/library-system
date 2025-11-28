@@ -1,6 +1,7 @@
 com\model\Devolucao.class
 com\model\Emprestimo.class
 com\mycompany\biblioteca\resources\JakartaEE10Resource.class
+com\utils\DatabaseInitializer.class
 com\model\Usuario.class
 com\controller\UsuarioServlet.class
 com\controller\LivroServlet.class
